@@ -36,7 +36,6 @@ Route::middleware('guest')->group(function (){
 
     Route::get('auth/{provider}/callback', [SocialiteController::class, 'callbackSocial'])
         ->name('socialite.callback');
-
 });
 
 require __DIR__.'/auth.php';

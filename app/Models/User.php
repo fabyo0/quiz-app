@@ -23,7 +23,8 @@ class User extends Authenticatable
         'password',
         'facebook_id',
         'google_id',
-        'github_id'
+        'github_id',
+        'is_admin'
     ];
 
     /**
