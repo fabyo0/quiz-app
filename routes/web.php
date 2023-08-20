@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('guest')->group(function (){
+
+    Route::get('auth/{provider}/redirect', [SocialiteController::class, 'loginSocial'])
+        ->name('socialite.auth');
+
+    Route::get('auth/{provider}/callback', [SocialiteController::class, 'callbackSocial'])
+        ->name('socialite.callback');
+
 });
 
 require __DIR__.'/auth.php';
