@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Questions\QuestionForm;
+use App\Http\Livewire\Questions\QuestionList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +31,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('guest')->group(function (){
+// Admin
+Route::middleware('isAdmin')->group(function () {
+    Route::get('questions', QuestionList::class)->name('questions');
+    Route::get('questions/create', QuestionForm::class)->name('questions.create');
+    Route::get('questions/{question}', QuestionForm::class)->name('questions.edit');
+});
+
+Route::middleware('guest')->group(function () {
 
     Route::get('auth/{provider}/redirect', [SocialiteController::class, 'loginSocial'])
         ->name('socialite.auth');
@@ -38,4 +47,4 @@ Route::middleware('guest')->group(function (){
         ->name('socialite.callback');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
