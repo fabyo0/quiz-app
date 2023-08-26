@@ -11,7 +11,7 @@ class QuizList extends Component
 {
     public function render()
     {
-        $quizzes = Quiz::latest()->paginate(5);
+        $quizzes = Quiz::withCount('questions')->latest()->paginate(5);
 
         return view('livewire.quiz.quiz-list', [
             'quizzes' => $quizzes

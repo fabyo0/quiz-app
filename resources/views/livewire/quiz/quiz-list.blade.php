@@ -32,6 +32,10 @@
                                     <span class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500">Description</span>
                                 </th>
                                 <th class="bg-gray-50 px-6 py-3 text-left">
+                                        <span
+                                            class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500">Questions count</span>
+                                </th>
+                                <th class="bg-gray-50 px-6 py-3 text-left">
                                     <span class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500">Published</span>
                                 </th>
                                 <th class="bg-gray-50 px-6 py-3 text-left">
@@ -46,7 +50,7 @@
                             @forelse($quizzes as $quiz)
                                 <tr class="bg-white">
                                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                        {{ $quiz->id }}
+                                        #{{ $quiz->id }}
                                     </td>
                                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                                         {{ $quiz->title }}
@@ -57,24 +61,34 @@
                                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                                         {{ $quiz->description }}
                                     </td>
+
                                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                        <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox" disabled @checked($quiz->published)>
+                                        {{ $quiz->questions_count }}
+                                    </td>
+
+                                    <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
+                                        <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox"
+                                               disabled @checked($quiz->published)>
                                     </td>
                                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                        <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox" disabled @checked($quiz->public)>
+                                        <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox"
+                                               disabled @checked($quiz->public)>
                                     </td>
                                     <td>
-                                        <a href="{{ route('quiz.edit', $quiz->id) }}" class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white hover:bg-gray-700">
+                                        <a href="{{ route('quiz.edit', $quiz->id) }}"
+                                           class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white hover:bg-gray-700">
                                             Edit
                                         </a>
-                                        <button wire:click="delete({{ $quiz->id }})" class="rounded-md border border-transparent bg-red-200 px-4 py-2 text-xs uppercase text-red-500 hover:bg-red-300 hover:text-red-700">
+                                        <button wire:click="delete({{ $quiz->id }})"
+                                                class="rounded-md border border-transparent bg-red-200 px-4 py-2 text-xs uppercase text-red-500 hover:bg-red-300 hover:text-red-700">
                                             Delete
                                         </button>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="px-6 py-4 text-center leading-5 text-gray-900 whitespace-no-wrap">
+                                    <td colspan="8"
+                                        class="px-6 py-4 text-center leading-5 text-gray-900 whitespace-no-wrap">
                                         No quizzes were found.
                                     </td>
                                 </tr>
